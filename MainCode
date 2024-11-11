@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fantasy Character Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background-image: url('FantasyBattlePic.jpg'); /* Replace with your image path */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
 
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Navigation tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .tab-button {
+      padding: 15px 30px;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      margin: 0 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .tab-button:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Active tab styling with glow effect */
+    .tab-button.active {
+      background-color: #6a5acd;
+      border-bottom: 3px solid #483d8b;
+      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
+    }
+
+    /* Content box inside each tab */
+    .tab-content {
+      display: none; /* Hide all tab content initially */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: rgba(59, 63, 71, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      width: 80%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    .tab-content.active-content {
+      display: flex; /* Only the active tab content will be visible */
+    }
+
+    /* General content styles */
+    .output div {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    /* Styling for Generate button */
+    .generate-button {
+      padding: 15px 30px;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      margin: 0 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .generate-button.active {
+      background-color: #6a5acd;
+      border-bottom: 3px solid #483d8b;
+      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Fantasy Character Generator</h1>
+
+  <!-- Navigation tabs -->
+  <div class="tabs">
+    <button class="tab-button active" onclick="showTab(0)">Home</button>
+    <button class="tab-button" onclick="showTab(1)">Generate Character</button>
+    <button class="tab-button" onclick="showTab(2)">About</button>
+  </div>
+
+  <!-- Home tab content -->
+  <div id="home" class="tab-content active-content">
+    <p>Welcome to the Fantasy Character Generator! Click "Generate Character" to create your own fantasy character.</p>
+  </div>
+
+  <!-- Generate tab content -->
+  <div id="generate" class="tab-content">
+    <button id="generateButton" class="generate-button" onclick="generateCharacter()">Generate Character</button>
+    <div class="output">
+      <div id="name"></div>
+      <div id="race"></div>
+      <div id="class"></div>
+      <div id="background"></div>
+    </div>
+  </div>
+
+  <!-- About tab content -->
+  <div id="about" class="tab-content">
+    <p>This tool allows you to generate random fantasy characters with unique names, races, classes, and backgrounds!</p>
+    <p>Created for storytelling, game development, or just for fun!</p>
+  </div>
+
+  <script>
+    // Data arrays for character generation
+    const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene"];
+    const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome"];
+    const classes = ["Wizard", "Warrior", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith"];
+    const backgrounds = [
+      "Raised by wolves in the deep forest.",
+      "A noble born to a fallen house.",
+      "A wanderer seeking lost knowledge.",
+      "The last survivor of a destroyed city.",
+      "A former pirate turned hero.",
+      "An orphan in search of answers.",
+      "A thief with a heart of gold.",
+      "A blessed hero on a divine quest."
+    ];
+
+    // Function to generate a random character
+    function generateCharacter() {
+      const randomName = names[Math.floor(Math.random() * names.length)];
+      const randomRace = races[Math.floor(Math.random() * races.length)];
+      const randomClass = classes[Math.floor(Math.random() * classes.length)];
+      const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+
+      document.getElementById('name').innerHTML = `<strong>Name:</strong> ${randomName}`;
+      document.getElementById('race').innerHTML = `<strong>Race:</strong> ${randomRace}`;
+      document.getElementById('class').innerHTML = `<strong>Class:</strong> ${randomClass}`;
+      document.getElementById('background').innerHTML = `<strong>Background:</strong> ${randomBackground}`;
+
+      // Add active class to the Generate button when clicked
+      const generateButton = document.getElementById('generateButton');
+      generateButton.classList.add('active'); // This will add the glowing effect to the button
+    }
+
+    // Function to show the selected tab
+    function showTab(tabIndex) {
+      // Hide all tabs
+      const tabs = document.querySelectorAll('.tab-content');
+      const tabButtons = document.querySelectorAll('.tab-button');
+
+      tabs.forEach(tab => {
+        tab.classList.remove('active-content'); // Hide content
+      });
+
+      tabButtons.forEach(button => {
+        button.classList.remove('active'); // Remove active class from all buttons
+      });
+
+      // Show the selected tab and add the active class to the corresponding button
+      const activeTab = tabs[tabIndex];
+      activeTab.classList.add('active-content'); // Show the active content
+
+      // Add active class to the clicked tab button
+      tabButtons[tabIndex].classList.add('active'); // Add active class to the clicked button
+    }
+  </script>
+
+</body>
+</html>
