@@ -16,7 +16,7 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-      background-image: url('FantasyBattlePic.jpg');
+      background-image: url('FantasyBattlePic.jpg'); /* Replace with your image path */
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
@@ -53,11 +53,11 @@
     .tab-button.active {
       background-color: #6a5acd;
       border-bottom: 3px solid #483d8b;
-      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6);
+      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
     }
 
     .tab-content {
-      display: none;
+      display: none; /* Hide all tab content initially */
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -71,7 +71,7 @@
     }
 
     .tab-content.active-content {
-      display: flex;
+      display: flex; /* Only the active tab content will be visible */
     }
 
     .output div {
@@ -94,15 +94,29 @@
     .generate-button.active {
       background-color: #6a5acd;
       border-bottom: 3px solid #483d8b;
-      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6);
+      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
+    }
+
+    /* Customization form styles */
+    #customizeSection {
+      display: grid;
+      grid-template-columns: 1fr 2fr;  /* Creates 2 columns: labels and inputs */
+      gap: 10px 20px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    label {
+      text-align: left;
+      font-size: 1.1em;
+      margin: 5px 0;
     }
 
     input, select {
       font-size: 1em;
       padding: 10px;
-      margin: 5px 0;
-      width: 80%;
-      max-width: 300px;
+      width: 100%;
       border-radius: 5px;
       border: 1px solid #ddd;
       background-color: rgba(0, 0, 0, 0.7);
@@ -114,6 +128,7 @@
 
   <h1>Fantasy Character Generator</h1>
 
+  <!-- Navigation tabs -->
   <div class="tabs">
     <button class="tab-button active" onclick="showTab(0)">Home</button>
     <button class="tab-button" onclick="showTab(1)">Generate Character</button>
@@ -134,9 +149,8 @@
       <div id="class"></div>
       <div id="background"></div>
     </div>
-    <!-- Customization forms -->
+    <!-- Customization form -->
     <div id="customizeSection" style="display:none;">
-      <h3>Customize Your Character</h3>
       <label for="customName">Name:</label>
       <input type="text" id="customName" oninput="updateCharacter()"/>
       <label for="customRace">Race:</label>
@@ -155,6 +169,7 @@
   </div>
 
   <script>
+    // Data arrays for character generation
     const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene"];
     const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome"];
     const classes = ["Wizard", "Warrior", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith"];
@@ -176,6 +191,7 @@
       background: ''
     };
 
+    // Function to generate a random character
     function generateCharacter() {
       const randomName = names[Math.floor(Math.random() * names.length)];
       const randomRace = races[Math.floor(Math.random() * races.length)];
@@ -190,12 +206,13 @@
       document.getElementById('background').innerHTML = `<strong>Background:</strong> ${randomBackground}`;
 
       // Show customization section
-      document.getElementById('customizeSection').style.display = 'block';
+      document.getElementById('customizeSection').style.display = 'grid';
 
       // Populate dropdowns with current values
       populateCustomizationFields();
     }
 
+    // Populate customization fields with the current character data
     function populateCustomizationFields() {
       // Populate race and class dropdowns with available options
       const raceSelect = document.getElementById('customRace');
@@ -203,27 +220,27 @@
       raceSelect.innerHTML = races.map(race => `<option value="${race}">${race}</option>`).join('');
       classSelect.innerHTML = classes.map(cls => `<option value="${cls}">${cls}</option>`).join('');
 
-      // Set current values as defaults in the input fields
+      // Set the current values for custom inputs
       document.getElementById('customName').value = generatedCharacter.name;
       document.getElementById('customRace').value = generatedCharacter.race;
       document.getElementById('customClass').value = generatedCharacter.class;
       document.getElementById('customBackground').value = generatedCharacter.background;
     }
 
+    // Update the character based on the customization form
     function updateCharacter() {
-      // Update the character object based on input changes
       generatedCharacter.name = document.getElementById('customName').value;
       generatedCharacter.race = document.getElementById('customRace').value;
       generatedCharacter.class = document.getElementById('customClass').value;
       generatedCharacter.background = document.getElementById('customBackground').value;
 
-      // Update the displayed character information in real-time
       document.getElementById('name').innerHTML = `<strong>Name:</strong> ${generatedCharacter.name}`;
       document.getElementById('race').innerHTML = `<strong>Race:</strong> ${generatedCharacter.race}`;
       document.getElementById('class').innerHTML = `<strong>Class:</strong> ${generatedCharacter.class}`;
       document.getElementById('background').innerHTML = `<strong>Background:</strong> ${generatedCharacter.background}`;
     }
 
+    // Show the selected tab
     function showTab(tabIndex) {
       const tabs = document.querySelectorAll('.tab-content');
       const tabButtons = document.querySelectorAll('.tab-button');
