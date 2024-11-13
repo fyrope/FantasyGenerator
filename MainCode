@@ -16,7 +16,7 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-      background-image: url('FantasyBattlePic.jpg'); /* Replace with your image path */
+      background-image: url('FantasyBattlePic.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
@@ -28,7 +28,6 @@
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
-    /* Navigation tabs */
     .tabs {
       display: flex;
       justify-content: center;
@@ -51,16 +50,14 @@
       background-color: rgba(0, 0, 0, 0.7);
     }
 
-    /* Active tab styling with glow effect */
     .tab-button.active {
       background-color: #6a5acd;
       border-bottom: 3px solid #483d8b;
-      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
+      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6);
     }
 
-    /* Content box inside each tab */
     .tab-content {
-      display: none; /* Hide all tab content initially */
+      display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -74,16 +71,14 @@
     }
 
     .tab-content.active-content {
-      display: flex; /* Only the active tab content will be visible */
+      display: flex;
     }
 
-    /* General content styles */
     .output div {
       font-size: 1.2em;
       margin: 10px 0;
     }
 
-    /* Styling for Generate button */
     .generate-button {
       padding: 15px 30px;
       cursor: pointer;
@@ -99,7 +94,19 @@
     .generate-button.active {
       background-color: #6a5acd;
       border-bottom: 3px solid #483d8b;
-      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
+      box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6);
+    }
+
+    input, select {
+      font-size: 1em;
+      padding: 10px;
+      margin: 5px 0;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
     }
   </style>
 </head>
@@ -107,7 +114,6 @@
 
   <h1>Fantasy Character Generator</h1>
 
-  <!-- Navigation tabs -->
   <div class="tabs">
     <button class="tab-button active" onclick="showTab(0)">Home</button>
     <button class="tab-button" onclick="showTab(1)">Generate Character</button>
@@ -128,6 +134,19 @@
       <div id="class"></div>
       <div id="background"></div>
     </div>
+    <!-- Customization forms -->
+    <div id="customizeSection" style="display:none;">
+      <h3>Customize Your Character</h3>
+      <label for="customName">Name:</label>
+      <input type="text" id="customName" />
+      <label for="customRace">Race:</label>
+      <select id="customRace"></select>
+      <label for="customClass">Class:</label>
+      <select id="customClass"></select>
+      <label for="customBackground">Background:</label>
+      <input type="text" id="customBackground" />
+      <button class="generate-button" onclick="saveCustomizations()">Save Customizations</button>
+    </div>
   </div>
 
   <!-- About tab content -->
@@ -137,7 +156,6 @@
   </div>
 
   <script>
-    // Data arrays for character generation
     const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene"];
     const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome"];
     const classes = ["Wizard", "Warrior", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith"];
@@ -152,43 +170,71 @@
       "A blessed hero on a divine quest."
     ];
 
-    // Function to generate a random character
+    let generatedCharacter = {
+      name: '',
+      race: '',
+      class: '',
+      background: ''
+    };
+
     function generateCharacter() {
       const randomName = names[Math.floor(Math.random() * names.length)];
       const randomRace = races[Math.floor(Math.random() * races.length)];
       const randomClass = classes[Math.floor(Math.random() * classes.length)];
       const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
 
+      generatedCharacter = { name: randomName, race: randomRace, class: randomClass, background: randomBackground };
+
       document.getElementById('name').innerHTML = `<strong>Name:</strong> ${randomName}`;
       document.getElementById('race').innerHTML = `<strong>Race:</strong> ${randomRace}`;
       document.getElementById('class').innerHTML = `<strong>Class:</strong> ${randomClass}`;
       document.getElementById('background').innerHTML = `<strong>Background:</strong> ${randomBackground}`;
 
-      // Add active class to the Generate button when clicked
-      const generateButton = document.getElementById('generateButton');
-      generateButton.classList.add('active'); // This will add the glowing effect to the button
+      // Show customization section
+      document.getElementById('customizeSection').style.display = 'block';
+
+      // Populate dropdowns with current values
+      populateCustomizationFields();
     }
 
-    // Function to show the selected tab
+    function populateCustomizationFields() {
+      // Populate race and class dropdowns with available options
+      const raceSelect = document.getElementById('customRace');
+      const classSelect = document.getElementById('customClass');
+      raceSelect.innerHTML = races.map(race => `<option value="${race}">${race}</option>`).join('');
+      classSelect.innerHTML = classes.map(cls => `<option value="${cls}">${cls}</option>`).join('');
+
+      // Set current values as defaults in the input fields
+      document.getElementById('customName').value = generatedCharacter.name;
+      document.getElementById('customRace').value = generatedCharacter.race;
+      document.getElementById('customClass').value = generatedCharacter.class;
+      document.getElementById('customBackground').value = generatedCharacter.background;
+    }
+
+    function saveCustomizations() {
+      // Save the modified values
+      generatedCharacter.name = document.getElementById('customName').value;
+      generatedCharacter.race = document.getElementById('customRace').value;
+      generatedCharacter.class = document.getElementById('customClass').value;
+      generatedCharacter.background = document.getElementById('customBackground').value;
+
+      // Update the displayed character information
+      document.getElementById('name').innerHTML = `<strong>Name:</strong> ${generatedCharacter.name}`;
+      document.getElementById('race').innerHTML = `<strong>Race:</strong> ${generatedCharacter.race}`;
+      document.getElementById('class').innerHTML = `<strong>Class:</strong> ${generatedCharacter.class}`;
+      document.getElementById('background').innerHTML = `<strong>Background:</strong> ${generatedCharacter.background}`;
+    }
+
     function showTab(tabIndex) {
-      // Hide all tabs
       const tabs = document.querySelectorAll('.tab-content');
       const tabButtons = document.querySelectorAll('.tab-button');
+      
+      tabs.forEach(tab => tab.classList.remove('active-content'));
+      tabButtons.forEach(button => button.classList.remove('active'));
 
-      tabs.forEach(tab => {
-        tab.classList.remove('active-content'); // Hide content
-      });
-
-      tabButtons.forEach(button => {
-        button.classList.remove('active'); // Remove active class from all buttons
-      });
-
-      // Show the selected tab and add the active class to the corresponding button
       const activeTab = tabs[tabIndex];
-      activeTab.classList.add('active-content'); // Show the active content
-
-      // Add active class to the clicked tab button
-      tabButtons[tabIndex].classList.add('active'); // Add active class to the clicked button
+      activeTab.classList.add('active-content');
+      tabButtons[tabIndex].classList.add('active');
     }
   </script>
 
