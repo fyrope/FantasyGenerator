@@ -138,14 +138,13 @@
     <div id="customizeSection" style="display:none;">
       <h3>Customize Your Character</h3>
       <label for="customName">Name:</label>
-      <input type="text" id="customName" />
+      <input type="text" id="customName" oninput="updateCharacter()"/>
       <label for="customRace">Race:</label>
-      <select id="customRace"></select>
+      <select id="customRace" onchange="updateCharacter()"></select>
       <label for="customClass">Class:</label>
-      <select id="customClass"></select>
+      <select id="customClass" onchange="updateCharacter()"></select>
       <label for="customBackground">Background:</label>
-      <input type="text" id="customBackground" />
-      <button class="generate-button" onclick="saveCustomizations()">Save Customizations</button>
+      <input type="text" id="customBackground" oninput="updateCharacter()"/>
     </div>
   </div>
 
@@ -211,14 +210,14 @@
       document.getElementById('customBackground').value = generatedCharacter.background;
     }
 
-    function saveCustomizations() {
-      // Save the modified values
+    function updateCharacter() {
+      // Update the character object based on input changes
       generatedCharacter.name = document.getElementById('customName').value;
       generatedCharacter.race = document.getElementById('customRace').value;
       generatedCharacter.class = document.getElementById('customClass').value;
       generatedCharacter.background = document.getElementById('customBackground').value;
 
-      // Update the displayed character information
+      // Update the displayed character information in real-time
       document.getElementById('name').innerHTML = `<strong>Name:</strong> ${generatedCharacter.name}`;
       document.getElementById('race').innerHTML = `<strong>Race:</strong> ${generatedCharacter.race}`;
       document.getElementById('class').innerHTML = `<strong>Class:</strong> ${generatedCharacter.class}`;
