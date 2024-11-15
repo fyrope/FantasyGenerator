@@ -147,6 +147,7 @@
       <div id="name"></div>
       <div id="race"></div>
       <div id="class"></div>
+      <div id="alignment"></div>
       <div id="background"></div>
     </div>
     <!-- Customization form -->
@@ -157,6 +158,8 @@
       <select id="customRace" onchange="updateCharacter()"></select>
       <label for="customClass">Class:</label>
       <select id="customClass" onchange="updateCharacter()"></select>
+      <label for="customAlignment">Alignment:</label>
+      <select id="customAlignment" onchange="updateCharacter()"></select>
       <label for="customBackground">Background:</label>
       <input type="text" id="customBackground" oninput="updateCharacter()"/>
     </div>
@@ -164,7 +167,7 @@
 
   <!-- About tab content -->
   <div id="about" class="tab-content">
-    <p>This tool allows you to generate random fantasy characters with unique names, races, classes, and backgrounds!</p>
+    <p>This tool allows you to generate random fantasy characters with unique names, races, classes, backgrounds, and alignments!</p>
     <p>Created for storytelling, game development, or just for fun!</p>
   </div>
 
@@ -173,6 +176,7 @@
     const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene"];
     const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome"];
     const classes = ["Wizard", "Warrior", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith"];
+    const alignments = ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"];
     const backgrounds = [
       "Raised by wolves in the deep forest.",
       "A noble born to a fallen house.",
@@ -188,6 +192,7 @@
       name: '',
       race: '',
       class: '',
+      alignment: '',
       background: ''
     };
 
@@ -196,13 +201,21 @@
       const randomName = names[Math.floor(Math.random() * names.length)];
       const randomRace = races[Math.floor(Math.random() * races.length)];
       const randomClass = classes[Math.floor(Math.random() * classes.length)];
+      const randomAlignment = alignments[Math.floor(Math.random() * alignments.length)];
       const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
 
-      generatedCharacter = { name: randomName, race: randomRace, class: randomClass, background: randomBackground };
+      generatedCharacter = { 
+        name: randomName, 
+        race: randomRace, 
+        class: randomClass, 
+        alignment: randomAlignment, 
+        background: randomBackground 
+      };
 
       document.getElementById('name').innerHTML = `<strong>Name:</strong> ${randomName}`;
       document.getElementById('race').innerHTML = `<strong>Race:</strong> ${randomRace}`;
       document.getElementById('class').innerHTML = `<strong>Class:</strong> ${randomClass}`;
+      document.getElementById('alignment').innerHTML = `<strong>Alignment:</strong> ${randomAlignment}`;
       document.getElementById('background').innerHTML = `<strong>Background:</strong> ${randomBackground}`;
 
       // Show customization section
@@ -214,16 +227,20 @@
 
     // Populate customization fields with the current character data
     function populateCustomizationFields() {
-      // Populate race and class dropdowns with available options
+      // Populate race, class, and alignment dropdowns with available options
       const raceSelect = document.getElementById('customRace');
       const classSelect = document.getElementById('customClass');
+      const alignmentSelect = document.getElementById('customAlignment');
+      
       raceSelect.innerHTML = races.map(race => `<option value="${race}">${race}</option>`).join('');
       classSelect.innerHTML = classes.map(cls => `<option value="${cls}">${cls}</option>`).join('');
+      alignmentSelect.innerHTML = alignments.map(align => `<option value="${align}">${align}</option>`).join('');
 
       // Set the current values for custom inputs
       document.getElementById('customName').value = generatedCharacter.name;
       document.getElementById('customRace').value = generatedCharacter.race;
       document.getElementById('customClass').value = generatedCharacter.class;
+      document.getElementById('customAlignment').value = generatedCharacter.alignment;
       document.getElementById('customBackground').value = generatedCharacter.background;
     }
 
@@ -232,11 +249,13 @@
       generatedCharacter.name = document.getElementById('customName').value;
       generatedCharacter.race = document.getElementById('customRace').value;
       generatedCharacter.class = document.getElementById('customClass').value;
+      generatedCharacter.alignment = document.getElementById('customAlignment').value;
       generatedCharacter.background = document.getElementById('customBackground').value;
 
       document.getElementById('name').innerHTML = `<strong>Name:</strong> ${generatedCharacter.name}`;
       document.getElementById('race').innerHTML = `<strong>Race:</strong> ${generatedCharacter.race}`;
       document.getElementById('class').innerHTML = `<strong>Class:</strong> ${generatedCharacter.class}`;
+      document.getElementById('alignment').innerHTML = `<strong>Alignment:</strong> ${generatedCharacter.alignment}`;
       document.getElementById('background').innerHTML = `<strong>Background:</strong> ${generatedCharacter.background}`;
     }
 
