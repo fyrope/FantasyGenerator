@@ -175,11 +175,11 @@
     // Data arrays for character generation
     const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene", "Baxten"];
     const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome", "Giant", "Saurian", "Robot", "Meifwa", "Cyborg", "Talpidian", "Vampire", "Mummy", "Demon", "Imp", "Goblin", "Kobold", "Merfolk", "Zombie", "Argonian", "Troll", "Centaur", "Fairy", "Jawa", "Ewok", "Wookie", "Bogling", "Harpy", "Ogre", "Cyclops", "Draconian", "Fiend", "Ghoul", "Mutant", "Gnoll", "Wendigo", "Hobgoblin", "Kappa", "Minotaur", "Naga", "Satyr", "Triton", "Troglodytes", "Leprechaun", "Ent", "Gorgon", "Genie", "Witch", "Wraith", ];
-    const classes = ["Wizard", "Warrior", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith", "Knight","Witch","Pyromancer","Arcane Sorcerer", "Knight", "Royal Guard", "Gambler", ];
+    const classes = ["Wizard", "Barbarian", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith", "Knight", "Witch", "Pyromancer", "Arcane Sorcerer", "Knight", "Royal Guard", "Gambler", "Warlock", "Hunter", "Hoodlum", "Mafia Boss", "Mafia Lacky", "Common Theif", "Farmer", "Politician", "Student", "Writer", "Artist", "Teacher", "Monster Trainer", "Conjurer", "Jedi", "Mechanic", "Scientist", "Law enforcement", "Spearman", "Army Officer", "General", "Commander", "Animator", "Computer Programmer", "Collector"];
     const alignments = ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"];
     const backgrounds = [
       "Raised by wolves in the deep forest.",
-      "A noble born to a fallen house.",
+      "A noble-born to a fallen house.",
       "A wanderer seeking lost knowledge.",
       "The last survivor of a destroyed city.",
       "A former pirate turned hero.",
