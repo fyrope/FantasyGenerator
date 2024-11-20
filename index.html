@@ -173,19 +173,41 @@
 
   <script>
     // Data arrays for character generation
-    const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene", "Baxten", "Nathan", "Dutch Vand der lined", "Callum", "Peregrine", "Oz", "Auron", "Gregor", "Sephiroth", "Rozen", "Eomer", "Seifer", "Rude", "Kamaji", "Stephan", "Odessa", "Aerith", "Sapphira", "Pandra", "Elvina", "LunaFreya", "Lysandra", "Mirage", "Godrick The Grafted", "Geralt", "Saruman", "Ariya", "Auron", "Eragon", "Ein"];
+    const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene", "Baxten", "Nathan", "Dutch Vand der linde", "Callum", "Peregrine", "Oz", "Auron", "Gregor", "Sephiroth", "Rozen", "Eomer", "Seifer", "Rude", "Kamaji", "Stephan", "Odessa", "Aerith", "Sapphira", "Pandra", "Elvina", "LunaFreya", "Lysandra", "Mirage", "Godrick The Grafted", "Geralt", "Saruman", "Ariya", "Auron", "Eragon", "Ein"];
     const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome", "Giant", "Saurian", "Robot", "Meifwa", "Cyborg", "Talpidian", "Vampire", "Mummy", "Demon", "Imp", "Goblin", "Kobold", "Merfolk", "Zombie", "Argonian", "Troll", "Centaur", "Fairy", "Jawa", "Ewok", "Wookie", "Bogling", "Harpy", "Ogre", "Cyclops", "Draconian", "Fiend", "Ghoul", "Mutant", "Gnoll", "Wendigo", "Hobgoblin", "Kappa", "Minotaur", "Naga", "Satyr", "Triton", "Troglodytes", "Leprechaun", "Ent", "Gorgon", "Genie", "Witch", "Wraith", ];
     const classes = ["Wizard", "Barbarian", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith", "Knight", "Witch", "Pyromancer", "Arcane Sorcerer", "Knight", "Royal Guard", "Gambler", "Warlock", "Hunter", "Hoodlum", "Mafia Boss", "Mafia Lacky", "Common Theif", "Farmer", "Politician", "Student", "Writer", "Artist", "Teacher", "Monster Trainer", "Conjurer", "Jedi", "Mechanic", "Scientist", "Law enforcement", "Spearman", "Army Officer", "General", "Commander", "Animator", "Computer Programmer", "Collector", "Outlaw", "Average Guy"];
     const alignments = ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"];
     const backgrounds = [
-      "Raised by wolves in the deep forest.",
-      "A noble-born to a fallen house.",
-      "A wanderer seeking lost knowledge.",
-      "The last survivor of a destroyed city.",
-      "A former pirate turned hero.",
-      "An orphan in search of answers.",
-      "A thief with a heart of gold.",
-      "A blessed hero on a divine quest."
+      "A cold and calculating bounty hunter, you track down dangerous criminals for a living. Your past is a mystery even to yourself.",
+      "Born with a mark of destiny, you were foretold to change the course of history. Many seek to either protect you or stop you from fulfilling your fated role.",
+      "Once a powerful deity, you were forgotten by mortals and cast out of the divine realms. Now, you wander as a mere mortal, seeking to regain your lost power.",
+      "You were the last survivor of a cataclysmic event that destroyed your world. Now, you roam the wastelands searching for meaning and a way to rebuild.",
+      "Framed for a crime you didn’t commit, you are constantly on the run from bounty hunters and law enforcement. You seek to clear your name.",
+      "You’ve spent your life researching forbidden knowledge. One fateful night, you discovered something that changed your destiny forever.",
+      "Unbeknownst to you, you are the heir to a powerful kingdom. Raised as an orphan, your true lineage is unknown even to you.",
+      "Born into a prestigious family, you were exiled for committing an unforgivable crime. You now wander the land seeking a way to reclaim your honour.",
+      "Once a noble prince, you were cursed by a vengeful sorceress. Now, you seek redemption or a cure for your affliction.",
+      "You were once a humble farmer, but when tragedy struck your village, you were forced to take up arms. Now, you’re caught in a journey you never asked for.",
+      "You were trained as a spy for a secretive organization. Your life is full of lies, shadows, and constant danger as you gather intelligence for the greater good.",
+      "You were once a soldier, but the horrors you witnessed in war have left you haunted. The spirits of the fallen follow you, either guiding or tormenting you.",
+      "Once a notorious thief, you’ve turned your life around after a fateful encounter with a wise mentor. Now, you use your skills for good, but old habits die hard.",
+      "A royal who was stolen away in the night, you were raised by common folk. The truth of your royal heritage is slowly emerging, and with it, a world of intrigue.",
+      "You were raised as a soldier-for-hire, serving the highest bidder. Now, you seek a cause worth fighting for, or perhaps a way to retire from the endless violence.",
+      "Once a member of a prestigious magical order, you were cast out after your experiments went awry. Now, you roam the world in search of knowledge and redemption.",
+      "You were raised in the wilderness by creatures of the wild. Through years of training, you learned to speak their language and forge bonds with animals and beasts.",
+      "A traveller without a home, you’ve wandered from place to place in search of adventure. You have seen the world’s beauty and its cruelty, but still, you journey on.",
+      "Once an immortal vampire, you have lived for centuries, watching civilizations rise and fall. Your thirst for blood has been replaced by a hunger for knowledge as you've changed into something else.",
+      "You were born into a family tasked with guarding powerful and dangerous secrets. You live in constant fear of these secrets being uncovered, whether by friend or foe.",
+      "Once a proud and honourable knight, you were disgraced and cast out of your order for a dishonourable act. You now seek redemption and to restore your shattered reputation.",
+      "You have the ability to see into the future through your dreams. These visions often lead you on strange and dangerous paths, some of which you don’t fully understand.",
+      "A shapeshifter with no memory of your true form, you have lived your life assuming different identities. The search for your true self is now your only goal.",
+      "You possess the uncanny ability to move unnoticed, making you a master of infiltration. Whether you’re a spy, burglar, or just a shadow in the night, you never leave a trace.",
+      "Raised by a reclusive druid in the deep forest, you learned the ways of nature. Now, you’re ready to leave the woods and discover the world beyond.",
+      "Once an angel sent to guide the mortals, you fell from grace due to your defiance of the divine order. Now, you wander the earth seeking redemption or revenge.",
+      "You were once a gladiator, fighting for the entertainment of others. After years of bloodshed, you escaped and now seek to put your past behind you—or use your skills to fight for a noble cause.",
+      "You’ve spent your life searching for cursed artifacts, driven by a mysterious force. These relics hold both unimaginable power and great danger.",
+      "Shunned by society due to your unusual abilities or appearance, you were forced to live outside the city walls. Now, you seek acceptance or revenge for the cruelty you endured.",
+      "You were trained as an assassin, but unlike others of your kind, you follow a strict moral code. You only kill when absolutely necessary and always seek to end suffering."
     ];
 
     let generatedCharacter = {
